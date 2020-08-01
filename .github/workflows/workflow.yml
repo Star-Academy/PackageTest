@@ -22,9 +22,6 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release --no-restore
       working-directory: SampleLibrary
-    # - name: Install code coverage tools
-    #   run: choco install opencover.portable\
-    #    choco install codecov
     - name: Test
       run: dotnet test --no-restore --verbosity normal --collect:"XPlat Code Coverage"
       working-directory: SampleLibrary
