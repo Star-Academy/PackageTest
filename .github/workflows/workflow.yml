@@ -26,5 +26,12 @@ jobs:
     #   run: choco install opencover.portable\
     #    choco install codecov
     - name: Test
-      run: dotnet test --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutput=TestResults/ /p:CoverletOutputFormat=xml
+      run: dotnet test --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=xml
       working-directory: SampleLibrary
+    - name: Publish code coverage reports to codecove.io
+      uses: codecov/codecov-action@v1
+      working-directory: SampleLibrary
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        file: ./coverage.xml
+        fail_ci_if_error: true
