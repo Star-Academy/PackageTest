@@ -30,8 +30,7 @@ jobs:
       working-directory: SampleLibrary
     - name: Publish code coverage reports to codecove.io
       uses: codecov/codecov-action@v1
-      working-directory: SampleLibrary
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
-        file: ./coverage.xml
+        file: ./SampleLibrary/coverage.xml
         fail_ci_if_error: true
