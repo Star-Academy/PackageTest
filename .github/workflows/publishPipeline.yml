@@ -18,12 +18,14 @@ jobs:
     
     - uses: nuget/setup-nuget@v1
       with:
-        nuget-api-key: ${{ secrets.NuGetAPIKey }}
         nuget-version: '5.x'
 
     - name: Add NuGet source
       run: nuget source Add -Name "NuGet" -Source "https://nuget.pkg.github.com/Star-Academy/index.json" -UserName ahmadsalimi  -Password ${{ secrets.GITHUB_TOKEN }}
-    
+
+    - name: Set Api Key
+      run: nuget setapikey ${{ secrets.NuGetAPIKey }} -Source "NuGet" [options]
+
     - name: Build library and generate NuGet Package
       run: dotnet pack -c Release -o artifacts
       working-directory: SampleLibrary/SampleLibrary
