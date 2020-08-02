@@ -17,7 +17,7 @@ jobs:
         dotnet-version: 3.1.301
 
     - name: Build library and generate NuGet Package
-      run: dotnet pack -c Release -o artifacts
+      run: dotnet pack -c Release -o artifacts -p:PackageVersion=1.0.${{ github.run_number }}
       working-directory: SampleLibrary/SampleLibrary
 
     - name: Publish NuGet Package

@@ -31,7 +31,3 @@ jobs:
         token: ${{ secrets.CODECOV_TOKEN }}
         files: ./**/coverage.cobertura.xml
         fail_ci_if_error: true
-    - name: Output Run ID
-      run: echo ${{ github.run_id }}
-    - name: Output Run Number
-      run: echo ${{ github.run_number }}
