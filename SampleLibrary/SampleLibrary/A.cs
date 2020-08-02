@@ -1,10 +1,12 @@
+using System;
+
 namespace SampleLibrary
 {
-    public class A
+    public class Printer
     {
-        public void B()
+        public void Print()
         {
-            
+            Console.WriteLine("hello");
         }
     }
 }
