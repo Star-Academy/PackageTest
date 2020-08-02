@@ -15,20 +15,10 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.301
-    
-    - uses: nuget/setup-nuget@v1
-      with:
-        nuget-version: '5.x'
-
-    - name: Add NuGet source
-      run: nuget source Add -Name "NuGet" -Source "https://nuget.pkg.github.com/Star-Academy/index.json" -UserName ahmadsalimi  -Password ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Set Api Key
-      run: nuget setapikey ${{ secrets.NuGetAPIKey }} -Source "NuGet" [options]
 
     - name: Build library and generate NuGet Package
       run: dotnet pack -c Release -o artifacts
       working-directory: SampleLibrary/SampleLibrary
 
     - name: Publish NuGet Package
-      run: nuget push ./SampleLibrary/SampleLibrary/artifacts/*.nupkg -Source "NuGet" -SkipDuplicate
+      run: dotnet nuget push *.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
