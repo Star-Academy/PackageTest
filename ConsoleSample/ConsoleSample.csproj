@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="StarAcademy.SampleLibrary" Version="1.0.1" />
+    <PackageReference Include="StarAcademy.SampleLibrary" Version="1.0.9" />
   </ItemGroup>
 
 </Project>
