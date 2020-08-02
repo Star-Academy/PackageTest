@@ -1,0 +1,29 @@
+name: publish
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.301
+    
+    - name: Build solution and generate NuGet Package
+      run: dotnet pack -c Release -o artifacts
+      working-directory: SampleLibrary/SampleLibrary
+
+    - name: Publish NuGet Package
+      uses: tanaka-takayoshi/nuget-publish-to-github-packages-action@v2.1
+      with:
+        nupkg-path:  './<path to classlib project>/artifacts/*.nupkg'
+        repo-owner:  'Star-Academy'
+        gh-user:  'Star-Academy'
+        token:  ${{ secrets.GITHUB_TOKEN }}
