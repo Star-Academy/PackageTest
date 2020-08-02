@@ -16,14 +16,17 @@ jobs:
       with:
         dotnet-version: 3.1.301
     
+    - uses: nuget/setup-nuget@v1
+      with:
+        nuget-api-key: ${{ secrets.NuGetAPIKey }}
+        nuget-version: '5.x'
+
+    - name: Add NuGet source
+      run: nuget source Add -Name "NuGet" -Source "https://nuget.pkg.github.com/Star-Academy/index.json" -UserName ahmadsalimi  -Password ${{ secrets.GITHUB_TOKEN }}
+    
     - name: Build library and generate NuGet Package
       run: dotnet pack -c Release -o artifacts
       working-directory: SampleLibrary/SampleLibrary
 
     - name: Publish NuGet Package
-      uses: tanaka-takayoshi/nuget-publish-to-github-packages-action@v2.1
-      with:
-        nupkg-path:  './SampleLibrary/SampleLibrary/artifacts/*.nupkg'
-        repo-owner:  'Star-Academy'
-        gh-user:  'ahmadsalimi'
-        token:  ${{ secrets.GITHUB_TOKEN }}
+      run: nuget push ./SampleLibrary/SampleLibrary/artifacts/*.nupkg -Source "NuGet" -SkipDuplicate
