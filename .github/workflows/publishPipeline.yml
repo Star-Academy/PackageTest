@@ -25,5 +25,5 @@ jobs:
       with:
         nupkg-path:  './SampleLibrary/SampleLibrary/artifacts/*.nupkg'
         repo-owner:  'Star-Academy'
-        gh-user:  'Star-Academy'
+        gh-user:  'ahmadsalimi'
         token:  ${{ secrets.GITHUB_TOKEN }}
