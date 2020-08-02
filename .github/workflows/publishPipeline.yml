@@ -16,14 +16,14 @@ jobs:
       with:
         dotnet-version: 3.1.301
     
-    - name: Build solution and generate NuGet Package
+    - name: Build library and generate NuGet Package
       run: dotnet pack -c Release -o artifacts
       working-directory: SampleLibrary/SampleLibrary
 
     - name: Publish NuGet Package
       uses: tanaka-takayoshi/nuget-publish-to-github-packages-action@v2.1
       with:
-        nupkg-path:  './<path to classlib project>/artifacts/*.nupkg'
+        nupkg-path:  './SampleLibrary/SampleLibrary/artifacts/*.nupkg'
         repo-owner:  'Star-Academy'
         gh-user:  'Star-Academy'
         token:  ${{ secrets.GITHUB_TOKEN }}
