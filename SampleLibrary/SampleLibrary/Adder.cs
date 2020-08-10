@@ -8,5 +8,10 @@ namespace SampleLibrary
         {
             return a + b;
         }
+
+        public void Print()
+        {
+            
+        }
     }
 }
